@@ -15,6 +15,13 @@ create_logs() {
     echo "Utworzono $num plików log_x.txt"
 }
 
+show_help() {
+    echo "Użycie: $0 --date | --logs [liczba] | --help"
+    echo "--date     : Wyświetla dzisiejszą datę."
+    echo "--logs [N] : Tworzy N plików logowych, gdzie N jest liczbą całkowitą. Domyślnie N=100."
+    echo "--help     : Wyświetla dostępne opcje."
+}
+
 # Sprawdzenie przekazanych argumentów
 case "$1" in
     --date)
@@ -27,6 +34,9 @@ case "$1" in
             create_logs 100
       fi
       ;;
+    --help)
+        show_help
+        ;;
     *)
         echo "Użycie: $0 --date | --logs [liczba]"
         ;;
