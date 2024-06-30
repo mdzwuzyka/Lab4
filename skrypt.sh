@@ -16,25 +16,25 @@ create_logs() {
 }
 
 show_help() {
-    echo "Użycie: $0 --date | --logs [liczba] | --help"
-    echo "--date     : Wyświetla dzisiejszą datę."
-    echo "--logs [N] : Tworzy N plików logowych, gdzie N jest liczbą całkowitą. Domyślnie N=100."
-    echo "--help     : Wyświetla dostępne opcje."
+    echo "Użycie: $0 [-h | --help] [-d | --date] [-l N | --logs N]"
+    echo "-h, --help    : Wyświetla pomoc."
+    echo "-d, --date    : Wyświetla dzisiejszą datę."
+    echo "-l N, --logs N: Tworzy N plików logowych, gdzie N jest liczbą całkowitą."
 }
 
 # Sprawdzenie przekazanych argumentów
 case "$1" in
-    --date)
+    --date | -d)
         show_date
         ;;
-    --logs)
+    --logs | -l)
       if [ $# -eq 2 ]; then
             create_logs "$2"
         else
             create_logs 100
       fi
       ;;
-    --help)
+    --help | -h)
         show_help
         ;;
     *)
