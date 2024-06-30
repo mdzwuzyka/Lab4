@@ -5,13 +5,14 @@ show_date() {
 }
 
 create_logs() {
-    for i in {1..100}; do
+    local num=$1
+    for (( i=1; i<=$num; i++ )); do
         filename="log_$i.txt"
         echo "Numer pliku: $i" > "$filename"
         echo "Nazwa skryptu: $0" >> "$filename"
         echo "Data utworzenia: $(date '+%Y-%m-%d %H:%M:%S')" >> "$filename"
     done
-    echo "Utworzono 100 plików log_x.txt"
+    echo "Utworzono $num plików log_x.txt"
 }
 
 # Sprawdzenie przekazanych argumentów
@@ -20,9 +21,13 @@ case "$1" in
         show_date
         ;;
     --logs)
-        create_logs
-        ;;
+      if [ $# -eq 2 ]; then
+            create_logs "$2"
+        else
+            create_logs 100
+      fi
+      ;;
     *)
-        echo "Użycie: $0 --date | --logs"
+        echo "Użycie: $0 --date | --logs [liczba]"
         ;;
 esac
